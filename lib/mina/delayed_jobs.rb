@@ -1,1 +1,1 @@
-load File.expand_path("../tail/tasks.rake", __FILE__)
+load File.expand_path("../delayed_jobs/tasks.rake", __FILE__)
