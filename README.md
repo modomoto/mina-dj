@@ -22,10 +22,10 @@ Or install it yourself as:
 Require `mina/delayed_jobs` in your `config/deploy.rb`:
 
 ```rb
-require 'mina/tail'
 require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
+require 'mina/dj'
 
 ...
 
@@ -33,6 +33,12 @@ task setup: :environment do
   ...
 end
 ```
+
+If you need multiple job queues, you can define them in the `deploy.rb`:
+
+set :delayed_jobs_queues, %w(default special1 special2)
+
+By default, it just starts one worker deamon.
 
 ## Usage
 
@@ -48,34 +54,22 @@ This gem provides mina tasks that can be used during deployment for restarting d
 These task help managing delayed jobs and can be used to
 
 ```shell
-$ mina production tail:live
+$ mina production delayed:work
 ```
 
-Tails `log/production.log` live.
+Starts a remote worker, that continually works on jobs.
 
 ```shell
-$ mina production tail:live file=unicorn.err.log
+$ mina production delayed:workoff
 ```
 
-Tails `log/unicorn.err.log` live.
+Starts a remote worker, that works until all jobs are done.
 
 ```shell
-$ mina production tail:last
+$ mina production delayed:workoff
 ```
 
-Returns the last 2000 lines of the `log/production.log`
-
-```shell
-$ mina production tail:last lines=20
-```
-
-Returns the last 20 lines of the `log/production.log`
-
-```shell
-$ mina production tail:last file=unicorn.err.log lines=20
-```
-
-Returns the last 20 lines of the `log/unicorn.err.log`
+Clears all existing jobs from the database.
 
 ## Contributing
 

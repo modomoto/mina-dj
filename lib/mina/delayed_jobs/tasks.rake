@@ -12,7 +12,13 @@ namespace :delayed_job do
 
   desc "Start delayed_job deamon..."
   task start: :environment do
-    queue! "#{bundle_prefix} bin/delayed_job start"
+    if fetch(:delayed_jobs_queues)
+      fetch(:delayed_jobs_queues).each_with_index do |queue, index|
+        queue! "#{bundle_prefix} bin/delayed_job --queue=#{queue} -i=#{index} start"
+      end
+    else
+      queue! "#{bundle_prefix} bin/delayed_job start"
+    end
   end
 
   desc "Start single delayed_job worker process, quitting once done..."
