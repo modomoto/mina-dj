@@ -25,7 +25,7 @@ Require `mina/delayed_jobs` in your `config/deploy.rb`:
 require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
-require 'mina/dj'
+require 'mina/delayed_jobs'
 
 ...
 
