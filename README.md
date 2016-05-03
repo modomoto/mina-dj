@@ -17,7 +17,9 @@ $ bundle
 ```
 
 Or install it yourself as:
-
+```rb
+$ gem install mina-dj
+```
 
 Require `mina/delayed_jobs` in your `config/deploy.rb`:
 
