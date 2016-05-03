@@ -17,7 +17,7 @@ $ bundle
 ```
 
 Or install it yourself as:
-```rb
+```shell
 $ gem install mina-dj
 ```
 
